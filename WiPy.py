@@ -15,9 +15,12 @@ class Wikipython:
 		try:
 			if pageId:
 				info = requiredSubJson[pageId]['extract']
+				if( info.endswith('may refer to:')):
+					print(searchQuery," returned multiple results. Please use a browser for a better search","\n\n")
+					return
 				listOfStatements = info.split('.')
 				firstFiveStatements = listOfStatements[:6]
-				print(' '.join(firstFiveStatements))
+				print(' '.join(firstFiveStatements).join('\n\n'))
 			else:
 				print("\nCould not find anything on ", searchQuery,"\n")
 		except KeyError:
@@ -28,6 +31,8 @@ class Wikipython:
 
 
 search = input('Search for: ')
+l = ['-' for _ in range(70)]
+print(''.join(l))
 Wikipython(search)
 
 
