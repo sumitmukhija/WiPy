@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import requests
+import socket
 
 class Wikipython:
 
@@ -30,10 +31,20 @@ class Wikipython:
 
 
 
-search = input('Search for: ')
-l = ['-' for _ in range(70)]
-print(''.join(l))
-Wikipython(search)
+def checkForInternet():
+	ipaddress=socket.gethostbyname(socket.gethostname())
+	if ipaddress == "127.0.0.1":
+		return False
+	return True
+  
+
+if not checkForInternet():
+	print('\n ~ Could not connect to the internet ~ \n')
+else:
+	search = input('Search for: ')
+	l = ['-' for _ in range(70)]
+	print(''.join(l))
+	Wikipython(search)
 
 
 
